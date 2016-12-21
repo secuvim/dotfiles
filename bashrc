@@ -1,7 +1,7 @@
-###########################################################################
+##############################################################################
 ## author: Stephan Engelmann alias Secuvim
 ##   file: ~/.bashrc
-###########################################################################
+##############################################################################
 
 PS1='\[\033[01;32m\]\u@\h \[\033[01;36m\]\W \$ \[\033[01;00m\]'
 export EDITOR=vim
@@ -21,6 +21,11 @@ alias pacup='yaourt -Syu --aur'
 alias reboot='systemctl reboot'
 alias removeorphans='yaourt -Rns $(yaourt -Qtdq)'
 alias suspend='systemctl suspend'
+alias tmux='tmux -2'
+
+if [ -f /usr/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh ]; then
+  source /usr/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh
+fi
 
 # local directory backups with 2 remaining versions
 function local_backup() {
@@ -36,11 +41,11 @@ function local_backup() {
 
 workon_intranet() {
   source ~/.pyvenvs/intranet/bin/activate
-  cd /home/stephan/dev/Intranet/intranet
+  cd /home/stephan/git/Intranet/intranet
   alias cov='coverage run ./manage.py test users inhabitants groups accounting pdf service && coverage html'
 }
 
-# colorize man pages
+# colored man pages
 man() {
   env \
     LESS_TERMCAP_mb=$'\E[01;31m' \
@@ -55,4 +60,3 @@ man() {
 
 # commands to execute when opening a terminal window
 [ ! "$UID" = "0" ] && shellPrompt
-
