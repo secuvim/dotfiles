@@ -1,0 +1,33 @@
+#!/bin/bash
+# Original by Archbey2 by Mr Green
+# Customized shellprompt by secuvim
+
+colour="\e[01;36m"
+os_string="ArchLinux"
+host_name=$(hostname)
+kernel=$(uname -r)
+arch_bit=$(uname -m)
+#up_time=$(uptime | awk '{print $3}' | sed 's|,||g')
+up_time=$(uptime -p | sed 's|up ||g')
+wm=$DE
+num_packs=$(pacman -Qq | wc -l)
+cpu_name=$(grep 'model name' /proc/cpuinfo | uniq | awk -F ':' '{print $2}' | awk -F 'CPU' '{print $1}')
+ram_total=$(free -mt | grep Mem: | awk '{print $2}')
+ram_used=$(free -mt | grep Mem: | awk '{print $3}')
+#ram_used=$(free -m | grep "buffers/cache" | awk '{print $3}')
+my_shell=$(echo $SHELL | sed 's|/bin/||g')
+#df -h --output=fstype,size,used /home | tail -n1 | awk '{ print $3" / "$2" ("$1")"}'
+root_space=$(df -h --output=fstype,size,used / | tail -n1 | awk '{ print $3" / "$2" ("$1")"}')
+#home_space=$(df -h --output=fstype,size,used $HOME | tail -n1 | awk '{ print $3" / "$2" ("$1")"}')
+
+echo -e "${colour}                                            "
+echo -e "${colour}                                           OS:\e[00m ${os_string} ${arch_bit}"
+echo -e "${colour}                                           Hostname:\e[00m ${host_name}"
+echo -e "${colour}\`YMM'   \`MP'      WELLCOME BACK ON         Kernel:\e[00m ${kernel}"
+echo -e "${colour}  VMb.  ,P                                 Uptime:\e[00m ${up_time}"
+echo -e "${colour}   \`MM.M'     pd*\"*b.  pd*\"*b.  ,pP\"\"Yq.   Packages:\e[00m ${num_packs}"
+echo -e "${colour}     MMb     (O)   j8 (O)   j8 6W'    \`Wb  RAM:\e[00m ${ram_used} / ${ram_total} MB"
+echo -e "${colour}   ,M'\`Mb.       ,;j9     ,;j9 8M      M8  CPU:\e[00m${cpu_name}"
+echo -e "${colour}  ,P   \`MM.   ,-='     ,-='    YA.    ,A9  Shell:\e[00m ${my_shell}"
+echo -e "${colour}.MM:.  .:MMa.Ammmmmmm Ammmmmmm  \`Ybmmd9\'  Root:\e[00m ${root_space}"
+echo
