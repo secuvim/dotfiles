@@ -1,0 +1,35 @@
+#!/bin/env python3
+
+##############################################################################
+# author: Stephan Engelmann alias Secuvim
+# github: https://github.com/secuvim
+#
+# A little script parsing financial csv files provided by LBB bank
+#
+# The output file can be imported as gnucash csv transactions file.
+##############################################################################
+
+import csv
+import sys
+import datetime
+
+file_name = sys.argv[1]
+
+with open(file_name, encoding="iso-8859-1") as csvfile:
+    reader = csv.reader(csvfile, delimiter=';', quotechar='|')
+    filtered_rows = []
+    for row in reader:
+        if (len(row) < 4 or "Konto-/Kartennummer" in row[0] or
+                "PUNKTE" in row[3] or "Punkte" in row[3]):
+            continue
+        date = datetime.datetime.strptime(
+            row[2], "%d.%m.%Y").strftime("%Y-%m-%d")
+        desc = row[3]
+        amount = row[6]
+        filtered_rows.append([date, desc, amount])
+
+with open(file_name + ".parsed", "w") as csvfile:
+    writer = csv.writer(csvfile, delimiter='\t', quotechar='|')
+    writer.writerows(filtered_rows)
+for row in filtered_rows:
+    print(', '.join(row))
