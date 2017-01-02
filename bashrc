@@ -12,6 +12,11 @@ export TEXMFHOME=~/.texmf
 
 PATH=/home/stephan/.sbin:$PATH
 
+# enable advanced bash completion
+if [ - /etc/bash_completion ]; then
+  . /etc/bash_completion
+fi
+
 # customized commands
 alias commands='less ~/.commands'
 alias commands_edit='vim ~/.commands'
