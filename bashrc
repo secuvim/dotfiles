@@ -13,7 +13,7 @@ export TEXMFHOME=~/.texmf
 PATH=/home/stephan/.sbin:$PATH
 
 # enable advanced bash completion
-if [ - /etc/bash_completion ]; then
+if [ -f /etc/bash_completion ]; then
   . /etc/bash_completion
 fi
 
