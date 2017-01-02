@@ -89,6 +89,9 @@ Plugin 'nathanaelkane/vim-indent-guides'
 " JavaScript - adding Tern based completions
 Plugin 'ternjs/tern_for_vim'
 
+" JavaScript auto formatter
+Plugin 'maksimr/vim-jsbeautify'
+
 " ============================================================================
 " Settings
 " ============================================================================
@@ -204,7 +207,7 @@ nmap Q gqap
 
 " Fullscreen toggle support
 map <silent> <F11>
-\    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
+      \    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
 
 " ============================================================================
 " Plug-in Configuration
@@ -234,11 +237,11 @@ let g:UltiSnipsJumpBackwardTrigger="<c-z>"
 let g:tex_flavor = "latex"
 let g:vimtex_enabled = 1
 let g:vimtex_syntax_minted = [
-    \ {
-    \   'lang' : 'cpp',
-    \   'environments' : ['cppcode', 'cppcode*', 'cppcode_something'],
-    \ }
-    \ ]
+      \ {
+      \   'lang' : 'cpp',
+      \   'environments' : ['cppcode', 'cppcode*', 'cppcode_something'],
+      \ }
+      \ ]
 let g:vimtex_latexmk_build_dir = 'build'
 let g:vimtex_view_general_viewer = 'okular'
 let g:vimtex_view_general_options = '--unique @pdf\#src:@line@tex'
@@ -261,6 +264,13 @@ let g:ycm_always_populate_location_list = 1
 "let g:ycm_server_python_interpreter = '/usr/bin/python'
 let g:ycm_python_binary_path = 'python'
 let g:ycm_server_python_interpreter = 'python'
+
+" vim-jsbeautify on <C-f>
+autocmd FileType javascript noremap <buffer> <c-f> :call JsBeautify()<cr>
+autocmd FileType json noremap <buffer> <c-f> :call JsonBeautify()<cr>
+autocmd FileType jsx noremap <buffer> <c-f> :call JsxBeautify()<cr>
+autocmd FileType html noremap <buffer> <c-f> :call HtmlBeautify()<cr>
+autocmd FileType css noremap <buffer> <c-f> :call CSSBeautify()<cr>
 
 " Syntastic
 let g:syntastic_auto_loc_list = 1
