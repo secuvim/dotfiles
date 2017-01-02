@@ -10,7 +10,14 @@ export TEXMFHOME=~/.texmf
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
 
-PATH=/home/stephan/.sbin:$PATH
+# manual $PATH additions
+if [ -d "$HOME/.local/bin" ]; then
+  PATH=$HOME/.local/bin:$PATH
+fi
+
+if [ -d "$HOME/.sbin" ]; then
+  PATH=$HOME/.sbin:$PATH
+fi
 
 # enable advanced bash completion
 if [ -f /etc/bash_completion ]; then
