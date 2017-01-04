@@ -1,21 +1,33 @@
-#!/bin/bash
+#!/bin/sh
 #
 # author: Stephan Engelmann (stephan-engelmann@gmx.de) alias Secuvim
 #
 # A little setup script for automating usage on a new device. If you don't
-# need all the features I included you should do a manual setup coppying or
-# linking each file seperately.
+# need all the features I included you should do a manual setup copying or
+# linking each file separately.
 #
 ##############################################################################
 
-rm $HOME/.bashrc
-ln -s bashrc $HOME/.bashrc
+FILES=$(pwd)
 
-rm $HOME/.tmux.conf
-ln -s tmux.conf $HOME/.tmux.conf
+rm -f $HOME/.bashrc
+ln -s $FILES/bashrc $HOME/.bashrc
 
-rm -rf $HOME/.vim
-ln -s vim $HOME/.vim
+rm -f $HOME/.tmux.conf
+ln -s $FILES/tmux.conf $HOME/.tmux.conf
+
 
 rm -rf $HOME/.sbin
-ln -s sbin $HOME/.sbin
+ln -s $FILES/sbin $HOME/.sbin
+
+rm -f $HOME/.Xresources
+ln -s $FILES/Xresources $HOME/.Xresources
+
+# vim
+rm -f $HOME/.vimrc
+ln -s $FILES/vimrc $HOME/.vimrc
+rm -rf $HOME/.vim
+mkdir -p $HOME/.vim/bundle
+git clone https://github.com/gmarik/vundle.git $HOME/.vim/bundle/vundle > /dev/null
+
+echo "Setup finished!\n* Please update vim Plugins and follow the manual steps for the youcompleteme plugin."
