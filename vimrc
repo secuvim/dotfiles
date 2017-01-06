@@ -92,6 +92,9 @@ Plugin 'ternjs/tern_for_vim'
 " JavaScript auto formatter
 Plugin 'maksimr/vim-jsbeautify'
 
+" Enable switching from vim to tmux split
+Plugin 'christoomey/vim-tmux-navigator'
+
 " ============================================================================
 " Settings
 " ============================================================================
