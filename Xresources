@@ -22,7 +22,7 @@ URxvt.perl-ext-common: fullscreen
 URxvt.keysym.F11: perl:fullscreen:switch
 
 ! A greyish border surrounding the standard output
-URxvt.borderColor: #292a2f
+URxvt.borderColor: #202020
 URxvt.borderless: true
 URxvt.internalBorder: 2
 
