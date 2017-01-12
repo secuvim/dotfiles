@@ -31,7 +31,7 @@ alias conkyrestart='killall conky; sleep 1; conky &'
 alias ls='ls --color=auto'
 alias pacup='yaourt -Syu --aur'
 alias reboot='systemctl reboot'
-alias removeorphans='yaourt -Rns $(yaourt -Qtdq)'
+alias removeorphans='pacaur -Rns $(pacaur -Qtdq)'
 alias suspend='systemctl suspend'
 alias tmux='tmux -2'
 
