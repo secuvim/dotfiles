@@ -19,6 +19,13 @@ if [ -d "$HOME/.sbin" ]; then
   PATH=$HOME/.sbin:$PATH
 fi
 
+if [ -f "/usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh" ]; then
+  powerline-daemon -q
+  POWERLINE_BASH_CONTINUATION=1
+  POWERLINE_BASH_SELECT=1
+  . /usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
+fi
+
 # enable advanced bash completion
 if [ -f /etc/bash_completion ]; then
   . /etc/bash_completion
