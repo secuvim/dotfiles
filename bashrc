@@ -36,7 +36,7 @@ alias commands='less ~/.commands'
 alias commands_edit='vim ~/.commands'
 alias conkyrestart='killall conky; sleep 1; conky &'
 alias ls='ls --color=auto'
-alias pacup='yaourt -Syu --aur'
+alias pacup='pacaur -Syu'
 alias reboot='systemctl reboot'
 alias removeorphans='pacaur -Rns $(pacaur -Qtdq)'
 alias suspend='systemctl suspend'
@@ -59,8 +59,8 @@ function local_backup() {
 }
 
 workon_intranet() {
-  source ~/.pyvenvs/intranet/bin/activate
-  cd /home/stephan/git/Intranet/intranet
+  source $HOME/git/Intranet/venv/bin/activate
+  cd $HOME/git/Intranet/intranet
   alias cov='coverage run ./manage.py test users inhabitants groups accounting pdf service && coverage html'
 }
 
