@@ -65,5 +65,9 @@ man() {
     man "$@"
 }
 
+port_process() {
+  netstat -tulpn | grep ":$1"
+}
+
 # commands to execute when opening a terminal window
 [ ! "$UID" = "0" ] && shellPrompt
