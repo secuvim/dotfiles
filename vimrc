@@ -37,8 +37,9 @@ Plugin 'vhdirk/vim-cmake'
 " fugitive - git interface
 Plugin 'tpope/vim-fugitive'
 
-" molokai - currently used color theme
+" color theme
 Plugin 'tomasr/molokai'
+Plugin 'altercation/vim-colors-solarized'
 
 " nerdcommenter - fast and easy un/commenting
 Plugin 'scrooloose/nerdcommenter'
@@ -100,9 +101,9 @@ Plugin 'christoomey/vim-tmux-navigator'
 " ============================================================================
 
 filetype plugin indent on
-syntax on
+syntax enable
 let mapleader = ","
-let maplocalleader = "ä"
+let maplocalleader = "\\"
 
 let g:load_doxygen_syntax=1
 
@@ -285,7 +286,7 @@ let g:syntastic_enable_signs = 1
 " Colorscheme
 " ============================================================================
 set background=dark
-colorscheme molokai
+colorscheme solarized
 " fixing too similar cors in vim diff mode
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
