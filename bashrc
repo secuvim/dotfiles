@@ -11,15 +11,15 @@ export TEXMFHOME=~/.texmf
 [[ $- != *i* ]] && return
 
 # manual $PATH additions
-if [ -d "$HOME/.local/bin" ]; then
+if [ -d '$HOME/.local/bin' ]; then
   PATH=$HOME/.local/bin:$PATH
 fi
 
-if [ -d "$HOME/.sbin" ]; then
+if [ -d '$HOME/.sbin' ]; then
   PATH=$HOME/.sbin:$PATH
 fi
 
-if [ -f "/usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh" ]; then
+if [ -f '/usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh' ]; then
   powerline-daemon -q
   POWERLINE_BASH_CONTINUATION=1
   POWERLINE_BASH_SELECT=1
@@ -45,18 +45,6 @@ alias tmux='tmux -2'
 if [ -f /usr/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh ]; then
   source /usr/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh
 fi
-
-# local directory backups with 2 remaining versions
-function local_backup() {
-  SOURCE=${1%/}
-  if [ -d $SOURCE ]; then
-    BACKUP1_DIR="${SOURCE}_backup.1"
-    BACKUP2_DIR="${SOURCE}_backup.2"
-    rm -rf $BACKUP2_DIR
-    mv $BACKUP1_DIR $BACKUP2_DIR
-    cp -R $SOURCE $BACKUP1_DIR
-  fi
-}
 
 workon_intranet() {
   source $HOME/git/Intranet/venv/bin/activate
