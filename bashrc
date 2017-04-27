@@ -41,6 +41,7 @@ alias reboot='systemctl reboot'
 alias removeorphans='pacaur -Rns $(pacaur -Qtdq)'
 alias suspend='systemctl suspend'
 alias tmux='tmux -2'
+alias docker_remove_untagged='docker rmi $(docker images | grep "^<none>" | awk "{print $3}")'
 
 if [ -f /usr/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh ]; then
   source /usr/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh
