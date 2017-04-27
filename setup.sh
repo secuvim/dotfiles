@@ -13,9 +13,11 @@ FILES=$(pwd)
 rm -f $HOME/.bashrc
 ln -s $FILES/bashrc $HOME/.bashrc
 
+rm -f $HOME/.zshrc
+ln -s $FILES/zshrc $HOME/.zshrc
+
 rm -f $HOME/.tmux.conf
 ln -s $FILES/tmux.conf $HOME/.tmux.conf
-
 
 rm -rf $HOME/.sbin
 ln -s $FILES/sbin $HOME/.sbin
