@@ -158,7 +158,7 @@ set smarttab
 set softtabstop=2
 set spellfile=/home/stephan/.vim/spellfile..add
 set spelllang=en,de
-set t_Co=256
+set t_Co=16
 set t_vb=
 set tabstop=2
 set title
@@ -285,8 +285,9 @@ let g:syntastic_enable_signs = 1
 " ============================================================================
 " Colorscheme
 " ============================================================================
-set background=dark
+set background=dark " dark | light
 colorscheme solarized
+call togglebg#map("<F12>")
 " fixing too similar cors in vim diff mode
 highlight DiffAdd    cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
 highlight DiffDelete cterm=bold ctermfg=10 ctermbg=17 gui=none guifg=bg guibg=Red
