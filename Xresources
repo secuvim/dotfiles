@@ -7,9 +7,10 @@
 
 *.cursorColor: #ebac54
 
-URxvt.termName: rxvt-256color
-URxvt.font:xft:DejaVuSansMonoForPowerline\ Nerd\ Font:pixelsize=13:antialias=true:autohint=true:style=Book
-URxvt.boldFont:xft:DejaVuSansMonoForPowerline\ Nerd\ Font:pixelsize=13:antialias=true:autohint=true:weight=bold:style=Book
+!URxvt.termName: rxvt-256color
+URxvt.font: xft:DejaVuSansMono\ Nerd\ Font\ Mono:pixelsize=28
+URxvt.boldFont: xft:DejaVuSansMono\ Nerd\ Font\ Mono:pixelsize=28:weight=bold
+URxvt.letterSpace: -1
 
 ! Disable scrollbar
 URxvt.scrollBar: false
@@ -18,7 +19,7 @@ URxvt.scrollBar_floating: false
 URxvt.scrollstyle: rxvt
 
 ! Enable fullscreen mode
-URxvt.perl-ext-common: fullscreen
+URxvt.perl-ext-common: fullscreen,font-size
 URxvt.keysym.F11: perl:fullscreen:switch
 
 ! A greyish border surrounding the standard output

@@ -1,11 +1,11 @@
 # If you come from bash you might have to change your $PATH.
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
-if [ -d "${HOME}.local/bin" ]; then
-  export PATH=${HOME}.local/bin:$PATH
+if [ -d "${HOME}/.local/bin" ]; then
+  export PATH=${HOME}/.local/bin:$PATH
 fi
 
-if [ -d "${HOME}.sbin" ]; then
-  export PATH=${HOME}.sbin:$PATH
+if [ -d "${HOME}/.sbin" ]; then
+  export PATH=${HOME}/.sbin:$PATH
 fi
 
 # Path to your oh-my-zsh installation.
