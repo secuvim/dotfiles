@@ -40,7 +40,7 @@ DISABLE_AUTO_UPDATE="true"
 # DISABLE_AUTO_TITLE="true"
 
 # Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+ENABLE_CORRECTION="false"
 
 # Uncomment the following line to display red dots whilst waiting for completion.
 COMPLETION_WAITING_DOTS="true"
@@ -108,6 +108,18 @@ workon_intranet() {
   source $HOME/git/Intranet/venv/bin/activate
   cd $HOME/git/Intranet/intranet
   alias cov='coverage run ./manage.py test users inhabitants groups accounting pdf service && coverage html'
+}
+
+swich_colortheme() {
+  if [[ $COLORTHEME == light ]]; then
+    xrdb -merge /home/stephan/git/dotfiles/Xresources > /dev/null
+    export COLORTHEME=dark
+    echo "Switched to solarized dark theme"
+  else
+    xrdb -merge /home/stephan/git/dotfiles/Xresources-light 2>/dev/null 1>/dev/null
+    export COLORTHEME=light
+    echo "Switched to solarized light theme"
+  fi
 }
 
 # colored man pages

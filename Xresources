@@ -3,13 +3,13 @@
 ! Customize urxvt and xterm
 !
 
-#include "./git/solarized/xresources/solarized"
+#include "/home/stephan/git/solarized/xresources/solarized"
 
 *.cursorColor: #ebac54
 
 URxvt.termName: rxvt-256color
-URxvt.font:xft:DejaVuSansMonoForPowerline\ Nerd\ Font:pixelsize=13:antialias=true:autohint=true:style=book
-URxvt.boldFont:xft:DejaVuSansMonoForPowerline\ Nerd\ Font:pixelsize=13:antialias=true:autohint=true:weight=bold:style=book
+URxvt.font:xft:DejaVuSansMonoForPowerline\ Nerd\ Font:pixelsize=13:antialias=true:autohint=true:style=Book
+URxvt.boldFont:xft:DejaVuSansMonoForPowerline\ Nerd\ Font:pixelsize=13:antialias=true:autohint=true:weight=bold:style=Book
 
 ! Disable scrollbar
 URxvt.scrollBar: false
