@@ -11,12 +11,13 @@
 "
 "      Author: Stephan Engelmann
 "        File: ~/.vimrc
-" Description: - a vimrc with Vundle to handle plug-ins
-"              - should provide an IDE like experience for a range of
+" Description: * a vimrc with Vundle to handle plug-ins
+"              * should provide an IDE like experience for a range of
 "                languages
-"              - support for git, doxygen, latex
+"              * support for clang, doxygen, git, latex, python
 " ============================================================================
 
+" base settings and autoapply on change
 set nocompatible
 filetype off
 set rtp+=~/.vim/bundle/vundle/
@@ -38,7 +39,6 @@ Plugin 'vhdirk/vim-cmake'
 Plugin 'tpope/vim-fugitive'
 
 " color theme
-Plugin 'tomasr/molokai'
 Plugin 'altercation/vim-colors-solarized'
 
 " nerdcommenter - fast and easy un/commenting
@@ -172,6 +172,11 @@ set wildignore=*.o,*~,*.pac,*.javac,*.swp,*.bak,*.pyc,*.class
 set wildmenu
 set wrap
 
+" relative line numbering
+set number relativenumber
+autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+
 " ============================================================================
 " Key mappings
 " ============================================================================
@@ -216,6 +221,14 @@ map <silent> <F11>
 " ============================================================================
 " Plug-in Configuration
 " ============================================================================
+
+" delimitMate
+let delimitMate_expand_cr = 1
+let delimitMate_expand_space = 1
+imap <expr> <CR> pumvisible()
+                 \ ? "\<C-Y>"
+                 \ : "<Plug>delimitMateCR"
+
 
 " NerdTree settings
 nmap <leader>f :NERDTreeToggle<CR>
@@ -264,8 +277,6 @@ let g:ycm_confirm_extra_conf = 1
 let g:ycm_enable_diagnostic_signs = 1
 let g:ycm_enable_diagnostic_highlighting = 0
 let g:ycm_always_populate_location_list = 1
-"let g:ycm_python_binary_path = '/usr/bin/python'
-"let g:ycm_server_python_interpreter = '/usr/bin/python'
 let g:ycm_python_binary_path = 'python'
 let g:ycm_server_python_interpreter = 'python'
 
