@@ -6,12 +6,13 @@
 #
 # A little script parsing financial csv files provided by LBB bank
 #
-# The output file can be imported as gnucash csv transactions file.
+# The output file can be imported as QIF transactions file into accounting
+# software like GnuCash.
 ##############################################################################
 
 import csv
-import sys
 import datetime
+import sys
 
 file_name = sys.argv[1]
 
@@ -19,6 +20,7 @@ with open(file_name, encoding="iso-8859-1") as csvfile:
     reader = csv.reader(csvfile, delimiter=';', quotechar='|')
     filtered_rows = []
     for row in reader:
+        # Filter amazon bonus point entries
         if (len(row) < 4 or "Konto-/Kartennummer" in row[0] or
                 "PUNKTE" in row[3] or "Punkte" in row[3]):
             continue
@@ -28,8 +30,16 @@ with open(file_name, encoding="iso-8859-1") as csvfile:
         amount = row[6]
         filtered_rows.append([date, desc, amount])
 
-with open(file_name + ".parsed", "w") as csvfile:
-    writer = csv.writer(csvfile, delimiter='\t', quotechar='|')
-    writer.writerows(filtered_rows)
-for row in filtered_rows:
-    print(', '.join(row))
+# write file in standarized QIF format
+with open(file_name + ".qif", "w") as export_file:
+    export_file.write("!Account\n")
+    export_file.write("NLBB Visa\n")
+    export_file.write("TCCard\n")
+    export_file.write("^\n")
+    for (date, memo, amount) in filtered_rows:
+        export_file.write("!Type:CCard\n")
+        export_file.write("D{}\n".format(date))
+        export_file.write("M{}\n".format(memo))
+        export_file.write("T{}\n".format(amount))
+        export_file.write("^\n")
+        print(', '.join([date, memo, amount]))
