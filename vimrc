@@ -32,11 +32,16 @@ call vundle#rc()
 " # git clone https://github.com/gmarik/vundle.git ~/.vim/bundle/vundle
 Plugin 'gmarik/vundle'
 
+" Emoji support
+Plugin 'junegunn/vim-emoji'
+
 " cmake - in editor support of CMake
 Plugin 'vhdirk/vim-cmake'
 
 " fugitive - git interface
 Plugin 'tpope/vim-fugitive'
+" gitgutter - show which lines have been modified
+Plugin 'airblade/vim-gitgutter'
 
 " color theme
 Plugin 'altercation/vim-colors-solarized'
@@ -57,19 +62,24 @@ Plugin 'scrooloose/nerdtree'
 "   <plugin>/powerline/powerline/config_files/themes/vim/default.json
 " to
 "   <home>/.config/powerline/themes/vim/default.json
-Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+"Plugin 'powerline/powerline', {'rtp': 'powerline/bindings/vim/'}
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 
 " tagbar - display class and fuction tags
 Plugin 'majutsushi/tagbar'
-
-" ultisnips - a snipped engine
-Plugin 'SirVer/ultisnips'
 
 " vim latex suite - a latex editing environment
 Plugin 'lervag/vimtex'
 
 " you complete me - auto complete everything !!! YOU WILL NEVER GO BACK !!!
-Plugin 'valloric/youcompleteme'
+"Plugin 'valloric/youcompleteme'
+" ultisnips - a snipped engine
+"Plugin 'SirVer/ultisnips'
+
+" Dark powered neo-complete
+Plugin 'Shougo/deoplete.nvim'
+Plugin 'zchee/deoplete-jedi'
 
 " a more advanced way to manage buffers
 Plugin 'jlanzarotta/bufexplorer'
@@ -96,6 +106,9 @@ Plugin 'maksimr/vim-jsbeautify'
 " Enable switching from vim to tmux split
 Plugin 'christoomey/vim-tmux-navigator'
 
+" CSS Colorizer
+Plugin 'chrisbra/Colorizer'
+
 " ============================================================================
 " Settings
 " ============================================================================
@@ -113,7 +126,7 @@ autocmd BufWritePre * :%s/\s\+$//e    " remove trailing whitespaces at save
 set autoindent
 set autoread
 set backspace=eol,start,indent
-set cmdheight=2
+set cmdheight=1
 set colorcolumn=80
 set copyindent
 set encoding=utf8
@@ -123,7 +136,6 @@ set ffs=unix,dos,mac
 set fo-=t
 set foldlevel=99
 set foldmethod=syntax
-set guifont=Liberation\ Mono\ for\ Powerline\ 9
 set guioptions-=L
 set guioptions-=T
 set guioptions-=m
@@ -146,7 +158,7 @@ set nowb
 set nowrap
 set nowritebackup
 set number                          " show line numbers
-set ruler
+set ruler                           " Show line/column numbers of cursor
 set scrolloff=3
 set secure                          " restrict command usage in other .vimrc
 set shiftround
@@ -214,10 +226,6 @@ map -q :cnext<cr>
 vmap Q gp
 nmap Q gqap
 
-" Fullscreen toggle support
-map <silent> <F11>
-      \    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
-
 " ============================================================================
 " Plug-in Configuration
 " ============================================================================
@@ -229,6 +237,14 @@ imap <expr> <CR> pumvisible()
                  \ ? "\<C-Y>"
                  \ : "<Plug>delimitMateCR"
 
+" Emoji
+"set omnifunc=emoji#complete
+
+" Gitgutter
+let g:gitgutter_sign_added = emoji#for('small_blue_diamond')
+let g:gitgutter_sign_modified = emoji#for('small_orange_diamond')
+let g:gitgutter_sign_removed = emoji#for('small_red_triangle_down')
+let g:gitgutter_sign_modified_removed = emoji#for('collision')
 
 " NerdTree settings
 nmap <leader>f :NERDTreeToggle<CR>
@@ -241,6 +257,8 @@ set laststatus=2
 set encoding=utf8
 set t_co=256
 let g:Powerline_symbols = 'fancy'
+let g:airline_powerline_fonts = 1
+let g:airline_symbols_crypt = ''
 
 " Tagbar settings
 nmap <leader>t :TagbarToggle<CR>
@@ -279,6 +297,9 @@ let g:ycm_enable_diagnostic_highlighting = 0
 let g:ycm_always_populate_location_list = 1
 let g:ycm_python_binary_path = 'python'
 let g:ycm_server_python_interpreter = 'python'
+
+" Deoplete
+call deoplete#enable()
 
 " vim-jsbeautify on <C-f>
 autocmd FileType javascript noremap <buffer> <c-f> :call JsBeautify()<cr>
