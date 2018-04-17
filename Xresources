@@ -11,6 +11,7 @@
 URxvt.font: xft:DejaVuSansMono\ Nerd\ Font\ Mono:pixelsize=28
 URxvt.boldFont: xft:DejaVuSansMono\ Nerd\ Font\ Mono:pixelsize=28:weight=bold
 URxvt.letterSpace: -1
+URxvt.cursorBlink: true
 
 ! Disable scrollbar
 URxvt.scrollBar: false
@@ -25,8 +26,7 @@ URxvt.keysym.F11: perl:fullscreen:switch
 ! A greyish border surrounding the standard output
 URxvt.borderColor: #202020
 URxvt.borderless: true
-URxvt.internalBorder: 2
-URxvt.intensityStyles: false
+URxvt.internalBorder: 8
 
 ! enable <S-Tab> in terminal
 URxvt.iso14755_52: False
