@@ -10,22 +10,24 @@
 # is opened.
 ##############################################################################
 
-colour="\e[01;34m"
+color1="\e[01;36m"
+color2="\e[00;36m"
 host_name=$(hostname)
 kernel=$(uname -r)
-up_time=$(uptime -p | sed 's|up ||g' | awk -F ',' '{print $1 $2}')
+up_time=$(uptime -p | sed 's|up ||g' | sed 's|,||g')
 num_packs=$(pacman -Qq | wc -l)
-cpu_name=$(grep 'model name' /proc/cpuinfo | uniq | awk -F ':' '{print $2}' | awk -F 'CPU' '{print $1}' | sed 's|Intel(R) Core(TM) ||g')
+cpu_name=$(grep 'model name' /proc/cpuinfo | uniq | awk -F ':' '{print $2}' | awk -F 'CPU' '{print $1}' | sed 's| Intel(R) Core(TM).||g')
 ram_used=$(free -mt | grep Mem: | awk '{print $3}')
 ram_total=$(free -mt | grep Mem: | awk '{print $2}')
 root_space=$(df -h --output=fstype,size,used / | tail -n1 | awk '{ print $3" / "$2" ("$1")"}')
+shell=$(echo ${SHELL} | sed 's|[a-z,A-Z]*/||g')
 
-echo -e "${colour}       pro·gram·mer\e[00m"
-echo -e "   ((            ____      ${colour}Hostname:\e[00m ${host_name}"
-echo -e "  .-))-..       |#inc\     ${colour}Kernel:\e[00m   ${kernel}"
-echo -e "  :----: ; ---> |class|    ${colour}Uptime:\e[00m   ${up_time}"
-echo -e "  :    ;-       |  int|    ${colour}CPU:\e[00m     ${cpu_name}"
-echo -e "   -..-         |_____|    ${colour}RAM:\e[00m      ${ram_used} / ${ram_total} MB"
-echo -e "An organism that converts  ${colour}Shell:\e[00m    ${SHELL}"
-echo -e "    caffeine into code     ${colour}Root:\e[00m     ${root_space}"
+echo -e "${color1}      pro·gram·mer"
+echo -e "${color2}  ((             ____   ${color1}Hostname: ${color2}${host_name}"
+echo -e "${color2} .-))-..        |#inc\  ${color1}Kernel:   ${color2}${kernel}"
+echo -e "${color2} :----: ; ----> |class| ${color1}Uptime:   ${color2}${up_time}"
+echo -e "${color2} :    ;-        |  int| ${color1}CPU:      ${color2}${cpu_name}"
+echo -e "${color2}  -..-          |_____| ${color1}RAM:      ${color2}${ram_used} / ${ram_total} MB"
+echo -e "${color2} an organism that turns ${color1}Shell:    ${color2}${shell}"
+echo -e "${color2} caffeine into software ${color1}Root:     ${color2}${root_space}"
 echo
