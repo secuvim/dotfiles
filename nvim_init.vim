@@ -148,6 +148,8 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 imap <C-k> <Plug>(neosnippet_expand_or_jump)
 smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
+" auto-close preview window
+autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
 " ==================== vim-gitgutter =========================================
 " Hint column on left side for git changes 'airblade/vim-gitgutter'
