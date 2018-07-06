@@ -101,13 +101,13 @@ export TEXMFHOME=~/.texmf
 # For a full list of active aliases, run `alias`.
 
 alias conkyrestart='killall conky; sleep 1; conky &'
-alias pacup='pacaur -Syu'
-alias reboot='systemctl reboot'
-alias removeorphans='pacaur -Rns $(pacaur -Qtdq)'
-alias suspend='systemctl suspend'
-alias tmux='tmux -2'
 alias docker_remove_untagged='docker rmi $(docker images | grep "^<none>" | awk "{print $3}")'
+alias pacup='sudo pacman -Syu'
 alias port_process='netstat -tulpn | grep ":$1"'
+alias reboot='systemctl reboot'
+alias removeorphans='sudo pacman -Rns $(pacman -Qtdq)'
+alias tmux='tmux -2'
+alias vim='nvim'
 
 # enable project virtual environment
 workon_intranet() {
