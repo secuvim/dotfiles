@@ -1,8 +1,8 @@
 # Dotfiles
 Configuration files for a productive environment using
-* bash
+* zsh
 * tmux
-* vim
+* neovim
 
 ## Setup
 The setup script will link all files to your $HOME folder allowing updates by
