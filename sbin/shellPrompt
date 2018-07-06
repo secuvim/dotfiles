@@ -25,7 +25,7 @@ shell=$(echo ${SHELL} | sed 's|[a-z,A-Z]*/||g')
 echo -e "${color1}      pro·gram·mer"
 echo -e "${color2}  ((             ____   ${color1}Hostname: ${color2}${host_name}"
 echo -e "${color2} .-))-..        |#inc\  ${color1}Kernel:   ${color2}${kernel}"
-echo -e "${color2} :----: ; ----> |class| ${color1}Uptime:   ${color2}${up_time}"
+echo -e "${color2} :----: ;  -->  |class| ${color1}Uptime:   ${color2}${up_time}"
 echo -e "${color2} :    ;-        |  int| ${color1}CPU:      ${color2}${cpu_name}"
 echo -e "${color2}  -..-          |_____| ${color1}RAM:      ${color2}${ram_used} / ${ram_total} MB"
 echo -e "${color2} an organism that turns ${color1}Shell:    ${color2}${shell}"

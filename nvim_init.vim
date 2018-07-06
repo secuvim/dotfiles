@@ -71,7 +71,7 @@ autocmd BufWritePre * :%s/\s\+$//e
 set autoindent
 set autoread                         " reload files onto change
 set backspace=eol,start,indent
-set clipboard+=unnamedplus
+set clipboard=unnamedplus
 set cursorline
 set colorcolumn=80
 set copyindent
@@ -96,7 +96,7 @@ set softtabstop=2
 set spelllang=en,de
 set tabstop=2
 set title
-set tw=79
+set tw=78
 set virtualedit=all
 set whichwrap+=<,>,h,l
 set wrap
@@ -155,7 +155,8 @@ autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 " Hint column on left side for git changes 'airblade/vim-gitgutter'
 let g:gitgutter_sign_added = emoji#for('small_blue_diamond')
 let g:gitgutter_sign_modified = emoji#for('small_orange_diamond')
-let g:gitgutter_sign_removed = emoji#for('small_red_triangle_down')
+let g:gitgutter_sign_removed_first_line = emoji#for('small_red_triangle_down')
+let g:gitgutter_sign_removed = emoji#for('small_red_triangle')
 let g:gitgutter_sign_modified_removed = emoji#for('fire')
 
 " ==================== NERDTree ==============================================
