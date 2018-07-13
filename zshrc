@@ -20,8 +20,12 @@ export ZSH=/usr/share/oh-my-zsh
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
 DEFAULT_USER="stephan"
 POWERLEVEL9K_MODE='nerdfont-complete'
-POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir rbenv vcs)
-POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status root_indicator background_jobs virtualenv history)
+POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
+POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(\
+    status root_indicator background_jobs virtualenv history)
+if [[ -z "${KONSOLE_PROFILE}" ]] && $KONSOLE_PROFILE = 'light'; then
+  POWERLEVEL9K_COLOR_SCHEME='light'
+fi
 ZSH_THEME="powerlevel9k/powerlevel9k"
 ZSH_TMUX_AUTOSTART='true'
 ZSH_TMUX_AUTOQUIT='false'
