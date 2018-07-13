@@ -109,6 +109,17 @@ man() {
     man "$@"
 }
 
+# set the tmux window name to the remote hostname when connecting via ssh
+ssh() {
+  if env | grep -q "TMUX_PANE"; then
+    tmux rename-window "$*"
+    command ssh "$@"
+    tmux set-window-option automatic-rename "on" 1>/dev/null
+  else
+    command ssh "$@"
+  fi
+}
+
 # enable project virtual environment
 workon_intranet() {
   source $HOME/git/Intranet/venv/bin/activate
