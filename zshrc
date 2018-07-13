@@ -78,26 +78,11 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 
-# export MANPATH="/usr/local/man:$MANPATH"
-
-# You may need to manually set your language environment
-# export LANG=en_US.UTF-8
-
-# Preferred editor for local and remote sessions
-#if [[ -n $SSH_CONNECTION ]]; then
-  #export EDITOR='vim'
-#else
-  #export EDITOR='mvim'
-#fi
-
 # Compilation flags
 export ARCHFLAGS="-arch x86_64"
 
 # ssh
 export SSH_KEY_PATH="~/.ssh/id_ecdsa"
-
-# vim latex support
-export TEXMFHOME=~/.texmf
 
 # Set personal aliases, overriding those provided by oh-my-zsh libs,
 # plugins, and themes. Aliases can be placed here, though oh-my-zsh
@@ -108,19 +93,10 @@ alias conkyrestart='killall conky; sleep 1; conky &'
 alias docker_remove_untagged='docker rmi $(docker images | grep "^<none>" | awk "{print $3}")'
 alias pacup='sudo pacman -Syu'
 alias port_process='netstat -tulpn | grep ":$1"'
-alias reboot='systemctl reboot'
 alias removeorphans='sudo pacman -Rns $(pacman -Qtdq)'
-alias tmux='tmux -2'
 alias vim='nvim'
 
-# enable project virtual environment
-workon_intranet() {
-  source $HOME/git/Intranet/venv/bin/activate
-  cd $HOME/git/Intranet/intranet
-  alias cov='coverage run ./manage.py test users inhabitants groups accounting pdf service && coverage html'
-}
-
-# colored man pages
+# make man pages more colorful
 man() {
   env \
     LESS_TERMCAP_mb=$'\E[01;31m' \
@@ -133,4 +109,12 @@ man() {
     man "$@"
 }
 
+# enable project virtual environment
+workon_intranet() {
+  source $HOME/git/Intranet/venv/bin/activate
+  cd $HOME/git/Intranet/intranet
+  alias cov='coverage run ./manage.py test users inhabitants groups accounting pdf service && coverage html'
+}
+
+# display welcome prompt
 shellPrompt
