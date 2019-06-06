@@ -57,4 +57,4 @@ workon_intranet() {
 }
 
 # display welcome prompt
-shellPrompt
+neofetch
