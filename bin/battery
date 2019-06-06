@@ -1,0 +1,15 @@
+#!/bin/bash
+
+##############################################################################
+## Displays short status of laptop battery and power supply
+##
+## This battery indicator is used as a command in the tmux status line.
+##############################################################################
+
+BATTERY_CAPACITY="$(cat /sys/class/power_supply/BAT0/capacity)"
+if grep -q 1 /sys/class/power_supply/AC/online; then
+  CHARGING_INDICATOR='🔌'
+else
+  CHARGING_INDICATOR='🔋'
+fi
+printf "%s%% %s\n" "$BATTERY_CAPACITY" "$CHARGING_INDICATOR"
