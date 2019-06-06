@@ -3,11 +3,9 @@
 if [ -d "${HOME}/.local/bin" ]; then
   export PATH=${HOME}/.local/bin:$PATH
 fi
-
-if [ -d "${HOME}/.sbin" ]; then
-  export PATH=${HOME}/.sbin:$PATH
+if [ -d "${HOME}/.bin" ]; then
+  export PATH=${HOME}/.bin:$PATH
 fi
-
 if [ -d "${HOME}/.gem" ]; then
   export PATH=${HOME}/.gem/ruby/2.5.0/bin:$PATH
 fi
