@@ -56,5 +56,7 @@ workon_intranet() {
   alias cov='coverage run ./manage.py test users inhabitants groups accounting pdf service && coverage html'
 }
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
 # display welcome prompt
 neofetch
