@@ -1,5 +1,4 @@
-# If you come from bash you might have to change your $PATH.
-# export PATH=$HOME/bin:/usr/local/bin:$PATH
+# path extensions for packages installed in home directory
 if [ -d "${HOME}/.local/bin" ]; then
   export PATH=${HOME}/.local/bin:$PATH
 fi
@@ -21,7 +20,7 @@ POWERLEVEL9K_MODE='nerdfont-complete'
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(context dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(\
     status root_indicator background_jobs virtualenv history)
-if [[ -z "${KONSOLE_PROFILE}" ]] && $KONSOLE_PROFILE = 'light'; then
+if [[ -z "${KONSOLE_PROFILE}" ]] && $KONSOLE_PROFILE == 'light'; then
   POWERLEVEL9K_COLOR_SCHEME='light'
 fi
 ZSH_THEME="powerlevel9k/powerlevel9k"
@@ -112,7 +111,7 @@ ssh() {
   if env | grep -q "TMUX_PANE"; then
     tmux rename-window "$*"
     command ssh "$@"
-    tmux set-window-option automatic-rename "on" 1>/dev/null
+    tmux set-window-option automatic-rename "on" 1 > /dev/null
   else
     command ssh "$@"
   fi
