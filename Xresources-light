@@ -1,7 +1,0 @@
-! author: Stephan Engelmann (stephan-engelmann@gmx.de) alias Secuvim
-!
-! Customize urxvt and xterm
-!
-
-#include "/home/stephan/git/dotfiles/Xresources"
-#include "/home/stephan/git/dotfiles/solarized-light"

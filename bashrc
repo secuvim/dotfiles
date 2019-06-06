@@ -4,8 +4,7 @@
 ##############################################################################
 
 PS1='\[\033[01;32m\]\u@\h \[\033[01;36m\]\W \$ \[\033[01;00m\]'
-export EDITOR=vim
-export TEXMFHOME=~/.texmf
+export EDITOR=nvim
 
 # If not running interactively, don't do anything
 [[ $- != *i* ]] && return
@@ -15,15 +14,8 @@ if [ -d '$HOME/.local/bin' ]; then
   PATH=$HOME/.local/bin:$PATH
 fi
 
-if [ -d '$HOME/.sbin' ]; then
-  PATH=$HOME/.sbin:$PATH
-fi
-
-if [ -f '/usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh' ]; then
-  powerline-daemon -q
-  POWERLINE_BASH_CONTINUATION=1
-  POWERLINE_BASH_SELECT=1
-  . /usr/lib/python3.6/site-packages/powerline/bindings/bash/powerline.sh
+if [ -d '$HOME/.bin' ]; then
+  PATH=$HOME/.bin:$PATH
 fi
 
 # enable advanced bash completion
@@ -31,27 +23,7 @@ if [ -f /etc/bash_completion ]; then
   . /etc/bash_completion
 fi
 
-# customized commands
-alias commands='less ~/.commands'
-alias commands_edit='vim ~/.commands'
-alias conkyrestart='killall conky; sleep 1; conky &'
 alias ls='ls --color=auto'
-alias pacup='pacaur -Syu'
-alias reboot='systemctl reboot'
-alias removeorphans='pacaur -Rns $(pacaur -Qtdq)'
-alias suspend='systemctl suspend'
-alias tmux='tmux -2'
-alias docker_remove_untagged='docker rmi $(docker images | grep "^<none>" | awk "{print $3}")'
-
-if [ -f /usr/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh ]; then
-  source /usr/lib/python3.5/site-packages/powerline/bindings/bash/powerline.sh
-fi
-
-workon_intranet() {
-  source $HOME/git/Intranet/venv/bin/activate
-  cd $HOME/git/Intranet/intranet
-  alias cov='coverage run ./manage.py test users inhabitants groups accounting pdf service && coverage html'
-}
 
 # colored man pages
 man() {
@@ -70,5 +42,7 @@ port_process() {
   netstat -tulpn | grep ":$1"
 }
 
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+
 # commands to execute when opening a terminal window
-[ ! "$UID" = "0" ] && shellPrompt
+[ ! "$UID" = "0" ] && neofetch
