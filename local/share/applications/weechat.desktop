@@ -1,0 +1,8 @@
+[Desktop Entry]
+Name=Weechat
+GenericName=Chat Client
+Comment=Chat Client
+Icon=weechat
+Exec=weechat
+Terminal=true
+Type=Application
