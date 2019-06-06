@@ -13,23 +13,32 @@ FILES=$(pwd)
 rm -f $HOME/.bashrc
 ln -s $FILES/bashrc $HOME/.bashrc
 
-rm -f $HOME/.zshrc
-ln -s $FILES/zshrc $HOME/.zshrc
+rm -rf $HOME/.bin
+ln -s $FILES/bin $HOME/.bin
+
+rm -rf $HOME/.conf/neofetch
+ln -s $FILES/conf/neofetch $HOME/.conf/neofetch
+
+rm -f $HOME/.conf/nvim/init.vim
+ln -s $FILES/conf/nvim/init.vim $HOME/.conf/nvim/init.vim
+
+rm -f $HOME/.local/share/applications/org.gnome.Terminal_light.desktop
+ln -s $FILES/local/share/applications/org.gnome.Terminal_light.desktop \
+  $HOME/.local/share/applications/org.gnome.Terminal_light.desktop
+
+rm -f $HOME/.local/share/applications/spotifyHDPI.desktop
+ln -s $FILES/local/share/applications/spotifyHDPI.desktop \
+  $HOME/.local/share/applications/spotifyHDPI.desktop
+
+rm -f $HOME/.local/share/applications/weechat.desktop
+ln -s $FILES/local/share/applications/weechat.desktop \
+  $HOME/.local/share/applications/weechat.desktop
 
 rm -f $HOME/.tmux.conf
 ln -s $FILES/tmux.conf $HOME/.tmux.conf
 
-rm -rf $HOME/.sbin
-ln -s $FILES/sbin $HOME/.sbin
+rm -f $HOME/.zpreztorc
+ln -s $FILES/zpreztorc $HOME/.zpreztorc
 
-rm -f $HOME/.Xresources
-ln -s $FILES/Xresources $HOME/.Xresources
-
-# vim
-rm -f $HOME/.vimrc
-ln -s $FILES/vimrc $HOME/.vimrc
-rm -rf $HOME/.vim
-mkdir -p $HOME/.vim/bundle
-git clone https://github.com/gmarik/vundle.git $HOME/.vim/bundle/vundle > /dev/null
-
-echo "Setup finished!\n* Please update vim Plugins and follow the manual steps for the youcompleteme plugin."
+rm -f $HOME/.zshrc
+ln -s $FILES/zshrc $HOME/.zshrc
