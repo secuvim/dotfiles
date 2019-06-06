@@ -6,7 +6,7 @@ if [ -d "${HOME}/.bin" ]; then
   export PATH=${HOME}/.bin:$PATH
 fi
 if [ -d "${HOME}/.gem" ]; then
-  export PATH=${HOME}/.gem/ruby/2.5.0/bin:$PATH
+  export PATH=${HOME}/.gem/ruby/2.6.0/bin:$PATH
 fi
 
 # POWERLEVEL9K Theming, It is later loaded by prezto
