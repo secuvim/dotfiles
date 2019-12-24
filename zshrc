@@ -53,7 +53,7 @@ ssh() {
 workon_intranet() {
   source $HOME/git/Intranet/venv/bin/activate
   cd $HOME/git/Intranet/intranet
-  alias cov='coverage run ./manage.py test users inhabitants groups accounting pdf service && coverage html'
+  alias cov='coverage run pytest "functional" && coverage html'
 }
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
