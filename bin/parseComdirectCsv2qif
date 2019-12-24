@@ -1,0 +1,44 @@
+#!/bin/env python3
+
+##############################################################################
+# author: Stephan Engelmann alias Secuvim
+# github: https://github.com/secuvim
+#
+# A little script parsing financial csv files provided by LBB bank
+#
+# The output file can be imported as QIF transactions file into accounting
+# software like GnuCash.
+##############################################################################
+
+import csv
+import datetime
+import sys
+
+file_name = sys.argv[1]
+
+with open(file_name, encoding="iso-8859-1") as csvfile:
+    reader = csv.reader(csvfile, delimiter=';', quotechar='"')
+    filtered_rows = []
+    for row in reader:
+        # Filter header rows
+        if (len(row) < 4 or "Buchungstag" in row[0]):
+            continue
+        date = datetime.datetime.strptime(
+            row[0], '%d.%m.%Y').strftime("%Y-%m-%d")
+        desc = row[3]
+        amount = row[4]
+        filtered_rows.append([date, desc, amount])
+
+# write file in standarized QIF format
+with open(file_name + ".qif", "w") as export_file:
+    export_file.write("!Account\n")
+    export_file.write("Ncomdirect Giro\n")
+    export_file.write("TBank\n")
+    export_file.write("^\n")
+    for (date, memo, amount) in filtered_rows:
+        export_file.write("!Type:CCard\n")
+        export_file.write("D{}\n".format(date))
+        export_file.write("M{}\n".format(memo))
+        export_file.write("T{}\n".format(amount))
+        export_file.write("^\n")
+        print(', '.join([date, memo, amount]))
