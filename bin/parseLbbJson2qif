@@ -10,25 +10,21 @@
 # software like GnuCash.
 ##############################################################################
 
-import csv
-import datetime
-import sys
+from json import load
+from sys import argv
 
-file_name = sys.argv[1]
+file_name = argv[1]
 
-with open(file_name, encoding="iso-8859-1") as csvfile:
-    reader = csv.reader(csvfile, delimiter=';', quotechar='|')
-    filtered_rows = []
-    for row in reader:
-        # Filter amazon bonus point entries
-        if (len(row) < 4 or "Konto-/Kartennummer" in row[0] or
-                "PUNKTE" in row[3] or "Punkte" in row[3]):
-            continue
-        date = datetime.datetime.strptime(
-            row[2], "%d.%m.%Y").strftime("%Y-%m-%d")
-        desc = row[3]
-        amount = row[6]
-        filtered_rows.append([date, desc, amount])
+with open(file_name) as f:
+    json_data = load(f)
+
+unfiltered_transactions = json_data['transactions']
+transactions = [[t['transactionDate'],
+                 t['details'],
+                 "{0:0.2f}".format(t["euroAmount"]/-100.)
+                           .replace('.', ',')]
+                for t in unfiltered_transactions
+                if t['accountId'] is not None and t['booked']]
 
 # write file in standarized QIF format
 with open(file_name + ".qif", "w") as export_file:
@@ -36,7 +32,7 @@ with open(file_name + ".qif", "w") as export_file:
     export_file.write("NLBB Visa\n")
     export_file.write("TCCard\n")
     export_file.write("^\n")
-    for (date, memo, amount) in filtered_rows:
+    for (date, memo, amount) in transactions:
         export_file.write("!Type:CCard\n")
         export_file.write("D{}\n".format(date))
         export_file.write("M{}\n".format(memo))
