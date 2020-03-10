@@ -30,9 +30,8 @@ Plug 'Shougo/neco-syntax'
 Plug 'Shougo/neco-vim'
 Plug 'Shougo/neoinclude.vim'
 Plug 'Shougo/neopairs.vim'
-Plug 'Shougo/neosnippet'
+Plug 'Shougo/neosnippet.vim'
 Plug 'Shougo/neosnippet-snippets'
-Plug 'SirVer/ultisnips'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'airblade/vim-gitgutter'
 Plug 'brooth/far.vim'
@@ -57,12 +56,15 @@ Plug 'majutsushi/tagbar'
 Plug 'numirias/semshi', { 'do': ':UpdateRemotePlugins' }
 Plug 'nvie/vim-flake8'
 Plug 'othree/csscomplete.vim'
+Plug 'sickill/vim-pasta'
 Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+"Plug 'scrooloose/syntastic'
 Plug 'tpope/vim-fugitive'
 Plug 'valloric/MatchTagAlways'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
+Plug 'vimwiki/vimwiki'
 Plug 'wellle/tmux-complete.vim'
 Plug 'zchee/deoplete-clang'
 Plug 'zchee/deoplete-go'
@@ -96,6 +98,7 @@ set hlsearch
 set ignorecase                      " ignore case when searching
 set incsearch
 set laststatus=2
+set mouse=a
 set noerrorbells
 set noswapfile
 set scrolloff=3
@@ -151,8 +154,8 @@ map [q :cnext<cr>
 " deoplete specific mappings
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-imap <C-k> i_<Plug>(neosnippet_expand_or_jump)
-smap <C-k> s_<Plug>(neosnippet_expand_or_jump)
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
 xmap <C-k> <Plug>(neosnippet_expand_target)
 
 " ==================== Plugins =================================== {{{1
@@ -161,10 +164,6 @@ let g:deoplete#enable_at_startup = 1
 let g:deoplete#enable_ignore_case = 1
 let g:deoplete#enable_smart_case = 1
 let g:deoplete#sources#jedi#show_docstring = 1
-let g:UltiSnipsExpandTrigger="<Plug>(ultisnips_expand)"
-let g:UltiSnipsJumpBackwardTrigger="<S-Tab>"
-let g:UltiSnipsJumpForwardTrigger="<Tab>"
-let g:UltiSnipsRemoveSelectModeMappings = 0
 " auto-close preview window
 autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
@@ -203,7 +202,7 @@ let g:tmuxline_preset = {
       \'a'    : '#S',
       \'win'  : ['#I', '#W'],
       \'cwin' : ['#I', '#W', '#F'],
-      \'x'    : '#(~/.sbin/battery)',
+      \'x'    : '#(~/.bin/battery)',
       \'y'    : ['%Y-%m-%d', '%H:%M'],
       \'z'    : '#H'}
 
@@ -236,6 +235,13 @@ let g:vimtex_view_general_options_latexmk = '--unique'
 
 " ==================== Markdown-Preview ========================== {{{2
 let g:mkdp_markdown_css = '/home/stephan/.config/nvim/markdown_preview_styles/markdown.css'
+
+" ==================== vimwiki =================================== {{{2
+" Apply vimwiki styling and behaviour only in the specified wiki directory
+let g:vimwiki_global_ext = 0
+" vimwiki style and location
+let g:vimwiki_list = [{'path': '~/Sync/Notes/', 'syntax': 'markdown', 'ext': '.md'}]
+
 " ==================== COLORSCHEME =============================== {{{1
 " The "solarized" colorscheme is available in dark and light and can be
 " switched by pressing <F12>.
