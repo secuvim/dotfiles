@@ -14,7 +14,7 @@ zstyle ':prezto:load' pmodule \
   'wakeonlan' \
   'git' \
 
-zstyle ':prezto:module:prompt' theme 'powerlevel9k'
+zstyle ':prezto:module:prompt' theme 'powerlevel10k'
 
 zstyle ':prezto:module:tmux:auto-start' local 'yes'
 zstyle ':prezto:module:tmux:session' name 'tmux'
