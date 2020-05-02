@@ -1,0 +1,66 @@
+#!/bin/env python3
+
+##############################################################################
+# author: Stephan Engelmann alias Secuvim
+# github: https://github.com/secuvim
+#
+# A little script fetching data from LBB-API and parsing into a QIF file
+#
+# The output file can be imported as QIF transactions file into accounting
+# software like GnuCash.
+##############################################################################
+
+from oauthlib.oauth2 import LegacyApplicationClient
+from requests_oauthlib.oauth2_session import OAuth2Session
+from sys import argv
+from datetime import date
+from getpass import getpass
+
+start_date = argv[1]
+end_date = str(date.today())
+auth_string = getpass(
+        prompt="Please enter account-number:username:password:device-id")
+account_number, username, password, device_id = auth_string.split(':')
+client_id = r'kkb'
+client_secret = r'secret'
+
+session = OAuth2Session(
+        client=LegacyApplicationClient(client_id),
+        redirect_uri='https://amazon.lbb.de/api/oauth/token')
+session.fetch_token(
+        token_url='https://amazon.lbb.de/api/oauth/token',
+        username=username,
+        password=password,
+        client_id=client_id,
+        client_secret=client_secret,
+        body=f'device_id={device_id}&client_id=kkb&brand=AMAZON',
+        )
+# get a token connected to the account
+session.get(f'https://amazon.lbb.de/api/program/ama/{account_number}')
+# fetch actual transactions
+response = session.get(
+        f'https://amazon.lbb.de/api/program/ama/{account_number}/'
+        f'transactions?from={start_date}&to={end_date}')
+fetched_transactions = response.json()['transactions']
+
+# filter and parse fetched transactions
+transactions = [[t['transactionDate'],
+                 t['details'],
+                 "{0:0.2f}".format(t["euroAmount"]/-100.)
+                           .replace('.', ',')]
+                for t in fetched_transactions
+                if t['accountId'] is not None and t['booked']]
+
+# write the resulting quicken file
+with open(f"lbb_from_{start_date}_to_{end_date}.qif", "w") as export_file:
+    export_file.write("!Account\n")
+    export_file.write("NLBB Visa\n")
+    export_file.write("TCCard\n")
+    export_file.write("^\n")
+    for (transaction_date, memo, amount) in transactions:
+        export_file.write("!Type:CCard\n")
+        export_file.write("D{}\n".format(transaction_date))
+        export_file.write("M{}\n".format(memo))
+        export_file.write("T{}\n".format(amount))
+        export_file.write("^\n")
+        print(', '.join([transaction_date, memo, amount]))
